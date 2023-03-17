@@ -1,37 +1,23 @@
-import json
+num = int(input('Digite um número inteiro: '))
+numSeq = 0
+fb = [0]
+status = False
 
-# Converte json em dicionario
-with open("dados.json") as dados: dadosFaturamento = json.load(dados)
-dadosValor = []
-maiorValor = 0
-menorValor = 0
-soma = 0
-media = 0
-numDias = 0
+if len(fb) == 1:
+    fb.append(1)
+    numSeq = 1
 
-# Filtra os valores positivos
-for i in dadosFaturamento:
-    if i['valor'] > 0:
-        dadosValor.append(i['valor'])
+# Calcula os valores da sequencia de Fibonacci até o primeiro valor maior que o número digitado
+while numSeq <= num:
+    numSeq = fb[len(fb) - 2] + numSeq
+    fb.append(numSeq)
 
-# Calcula maior  e menor valores
-menorValor = min(dadosValor)
-maiorValor = max(dadosValor)
+# Verifica se o número é Fibonacci
+for i in fb:
+    if i == num:
+        print(f'O número {num} pertence a sequência  de Fibonacci.')
+        status = True
+        break
 
-# Soma valores
-for c in dadosValor:
-    soma += c
-
-# Calcula média
-media = soma / len(dadosValor)
-
-# Determina número de dias acima da média
-for c in dadosValor:
-    if c > media:
-        numDias += 1
-
-print(f'O menor valor diário faturado foi: {menorValor}')
-print(f'O maior valor diário faturado foi: {maiorValor}')
-print(f'Número de dias acima da média mensal: {numDias}')
-
-print(media)
+if status == False:
+    print(f'O número {num} NÃO pertence a sequência de Fibonacci.')

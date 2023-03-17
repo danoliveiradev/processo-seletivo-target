@@ -1,20 +1,37 @@
-dadosfaturamento = [{'estado':'SP', 'valor':67836.43},
-                    {'estado':'RJ','valor':36678.66},
-                    {'estado':'MG','valor':29229.88},
-                    {'estado':'ES','valor':27165.48},
-                    {'estado':'outros','valor':19849.53}]
+import json
 
-valorTotal = 0
-percentual = 0
+# Converte json em dicionario
+with open("dados.json") as dados: dadosFaturamento = json.load(dados)
+dadosValor = []
+maiorValor = 0
+menorValor = 0
+soma = 0
+media = 0
+numDias = 0
 
-# Soma os valores dos Estados
-for i in dadosfaturamento:
-    valorTotal += i['valor']
+# Filtra os valores positivos
+for i in dadosFaturamento:
+    if i['valor'] > 0:
+        dadosValor.append(i['valor'])
 
-# Realiza o calculo de participação percentual
-for c in dadosfaturamento:
-    percentual = (c['valor'] / valorTotal) * 100
-    print(f"Estado: {c['estado']}")
-    print(f"Valor: R$ {c['valor']}")
-    print(f'Representação: {percentual:.2f}%')
-    print('-=-'*20)
+# Calcula maior  e menor valores
+menorValor = min(dadosValor)
+maiorValor = max(dadosValor)
+
+# Soma valores
+for c in dadosValor:
+    soma += c
+
+# Calcula média
+media = soma / len(dadosValor)
+
+# Determina número de dias acima da média
+for c in dadosValor:
+    if c > media:
+        numDias += 1
+
+print(f'O menor valor diário faturado foi: {menorValor}')
+print(f'O maior valor diário faturado foi: {maiorValor}')
+print(f'Número de dias acima da média mensal: {numDias}')
+
+print(media)
