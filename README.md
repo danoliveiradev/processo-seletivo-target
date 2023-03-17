@@ -1,4 +1,4 @@
-# **Processo Seletivo Traget - Estágio 2023**
+# **Processo Seletivo Target - Estágio 2023**
 
 ## 📝 **Descrição**
 
